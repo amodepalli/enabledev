@@ -5,9 +5,10 @@ import { HttpModule } from '@angular/http';
 import {ReactiveFormsModule} from "@angular/forms";
 
 import { AppComponent } from './app.component';
-import { MeasurementsComponent } from './measurements.component';
-import { OutputComponent } from './output.component';
-import { WelcomeComponent } from './welcome.component'; 
+import { MeasurementsComponent } from './measurements/measurements.component';
+import { OutputComponent } from './output/output.component';
+import { WelcomeComponent } from './welcome/welcome.component'; 
+import {AutomeasureComponent} from './automeasure/automeasure.component'
 import { routing, appRoutingProviders } from './app.routing';
 import {MaterializeModule} from "angular2-materialize";
 
@@ -18,7 +19,8 @@ import {MaterializeModule} from "angular2-materialize";
     AppComponent,
     MeasurementsComponent,
     OutputComponent,
-    WelcomeComponent
+    WelcomeComponent,
+    AutomeasureComponent
   ],
   imports: [
     BrowserModule,

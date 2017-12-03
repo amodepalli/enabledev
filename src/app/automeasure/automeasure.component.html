@@ -1,0 +1,26 @@
+ <body>
+ 	<div class="container">
+ 		<div class="row">
+ 			<!-- Measurement inputs  -->
+ 			<div class="col s12 m12 l12">
+ 				<div class="card">
+ 					<canvas  #myCanvas width="1920" height="1080"></canvas>
+
+
+ 				</div>
+ 				<div class="col s12 m12 l4">
+ 					<input type="file"  (change)="upload($event)" id="imageLoader">
+ 				</div>
+ 				<div class="col s12 m12 l4">
+ 					<button (click)="erase()" >Reset</button>
+ 				</div>
+ 				<div class="col s12 m12 l4">
+ 					<button (click)="lineListeners()">Line</button>
+ 				</div>
+ 				<div class="col s12 m12 l4">
+ 					<button (click)="rectangleListeners()" >Rectangle</button>
+ 				</div>
+ 			</div>
+ 		</div>
+ 	</div>
+ </body>
