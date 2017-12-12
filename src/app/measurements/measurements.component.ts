@@ -2,20 +2,34 @@ import { Component, OnInit, EventEmitter } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder,FormArray } 
     from '@angular/forms';
 import {MaterializeDirective,MaterializeAction} from "angular2-materialize";
+declare var jquery:any;
+declare var $ :any;
 
 @Component({
   selector: 'app-measurements',
   templateUrl: './measurements.component.html',
-  styles: []
+  styles: [`
+    .card.large {
+      height: 760px;
+    }
+    
+  `],
 })
 export class MeasurementsComponent implements OnInit {
+   //initialization steps
+  constructor() {}
 
+  ngOnInit(){
+  }
+
+  units = "imperial";
+  handSize = "";
   // handWidth = new FormControl("", Validators.required)
-  middleFingerLength = new FormControl("")
-  palmLength = new FormControl("")
+  middleFingerLength = new FormControl("");
+  palmLength = new FormControl("");
   // handType = new FormControl("",Validators.required)
-  height = new FormControl("",Validators.required)
-  weight = new FormControl("",Validators.required)
+  height = new FormControl("",Validators.required);
+  weight = new FormControl("",Validators.required);
   // accuracyLevel = new FormControl(1,Validators.required)
 
   // //needed to ensure that the form does not get duplicated formcontrol values
@@ -45,12 +59,7 @@ export class MeasurementsComponent implements OnInit {
     this.modalActions.emit({action:"modal",params:['close']});
   }
 
-  //initialization steps
-  constructor() {}
-
-  ngOnInit(){
-  }
-
+ 
   
   // accuracyLevelChange(){
 
@@ -91,14 +100,26 @@ export class MeasurementsComponent implements OnInit {
     
   // }
 
+  handSizeSubmit() {
 
-  onSubmit() {
-        // console.log(this.handType);
-        // console.log(this.handWidth);
-        console.log(this.form.controls['accuracyLevel'].value)
+    window.location.href='http://127.0.0.1:8000/model/'+ this.handSize + ".zip";
   }
 
-}
+  onSubmit() {
+    // var url = "http://127.0.0.1:8000/model/";
+    // this.http.get('http://127.0.0.1:8000/model/Palm.STL').subscribe(data => {
+    //   console.log(data);
+    // });
+
+    if(this.units=="imperial"){
+
+    }
+    window.location.href='http://127.0.0.1:8000/model/hand.zip';
+  }
+
+  }
+
+
 
 
 
