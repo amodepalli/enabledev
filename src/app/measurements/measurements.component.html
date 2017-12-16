@@ -170,11 +170,17 @@ $('.cards').masonry({
         <div class="card">
             <div class="card-content black-text">
                  <span class="card-title center">Hand Assembly</span>
-                 <h6 class="center">(TO BE ADDED SOON)</h6>
-                        <div class="video-container">
-        <iframe src="https://www.youtube.com/embed/9ZuxvIZIfng" frameborder="0" allowfullscreen></iframe>
-      </div> 
-      <h6 class="center">ABOVE VIDEO SHOWS TESTING TASKS</h6>     
+                 <br>
+                 <h6>Press the following download button to get a pdf file for instructions for how to assemble the 3d printed hand.</h6>
+            </div>
+             <div class="card-action">
+               <div class="row ">
+                  <div class=" col s6 push-s4 ">
+                     <form [formGroup]="form" class="s6 push-s3">
+                        <button class='btn'(click)="onAssemblySubmit()">Download</button>
+                     </form>
+                  </div>
+               </div>
             </div>
         </div>
       </div>

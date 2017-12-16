@@ -24,19 +24,10 @@ export class MeasurementsComponent implements OnInit {
 
   units = "imperial";
   handSize = "";
-  // handWidth = new FormControl("", Validators.required)
   middleFingerLength = new FormControl("");
   palmLength = new FormControl("");
-  // handType = new FormControl("",Validators.required)
   height = new FormControl("",Validators.required);
   weight = new FormControl("",Validators.required);
-  // accuracyLevel = new FormControl(1,Validators.required)
-
-  // //needed to ensure that the form does not get duplicated formcontrol values
-  // //if user decides to change accuracy vals
-  // accuracyLevelChanged = false
-  // accuracyLevelTwoEnabled = false
-  // accuracyLevelThreeEnabled = false
 
   //initialzing form with minimum required form vals
   form= new FormGroup({
@@ -60,61 +51,39 @@ export class MeasurementsComponent implements OnInit {
   }
 
  
-  
-  // accuracyLevelChange(){
 
-  //   if(this.accuracyLevel.value == 1){
-
-  //     //if user pressed decides to change accuracy level
-  //     //ensure that the form does not contain other addtional inputs
-  //     //allows next button to continue
-  //     if(this.accuracyLevelTwoEnabled == true){
-  //       this.form.removeControl("handWidth");
-  //       this.accuracyLevelChanged = false;
-  //       this.accuracyLevelTwoEnabled = false;
-  //     }
-
-  //     if(this.accuracyLevelThreeEnabled == true){
-  //       this.form.removeControl("handWidth");
-  //       this.form.removeControl("handLength")
-  //       this.accuracyLevelChanged = false;
-  //       this.accuracyLevelThreeEnabled = false;
-  //     }
-
-
-
-  //   }
-  //   if (this.accuracyLevel.value == 2 && !this.accuracyLevelTwoEnabled) {
-  //       this.form.addControl("handWidth", this.handWidth);
-  //       this.accuracyLevelTwoEnabled = true;
-  //       this.accuracyLevelChanged = true
-  //   }
-
-  //   if (this.accuracyLevel.value == 3 && !this.accuracyLevelThreeEnabled) {
-  //       this.form.addControl("handWidth", this.handWidth);
-  //       this.form.addControl("handLength", this.handWidth);
-  //       this.accuracyLevelThreeEnabled = true;
-  //       this.accuracyLevelChanged = true
-  //   }
-
-    
-  // }
 
   handSizeSubmit() {
 
-    window.location.href='http://127.0.0.1:8000/model/'+ this.handSize + ".zip";
+    window.location.href='http://127.0.0.1:8000/Server/'+ this.handSize + "_hand.zip";
+  }
+
+  onAssemblySubmit() {
+
+    window.location.href='http://127.0.0.1:8000/Server/User_Guide_MDP_Hand.pdf';
   }
 
   onSubmit() {
-    // var url = "http://127.0.0.1:8000/model/";
-    // this.http.get('http://127.0.0.1:8000/model/Palm.STL').subscribe(data => {
-    //   console.log(data);
-    // });
-
+    var height = 0;
+    var weight = 0;
     if(this.units=="imperial"){
-
+      weight = this.weight.value * 0.453592 * 10;
+      height = this.height.value * 25.4;
+    } else if (this.units == "metric"){
+      weight = this.weight.value * 10;
+      height = this.height.value;
     }
-    window.location.href='http://127.0.0.1:8000/model/hand.zip';
+
+    var middleFingerLength =(2.9118+0.0441*height+0.0034*weight)/10;
+    var middleFingerLengthRounded = Math.round(middleFingerLength * 10)/10 + .1;
+    if (middleFingerLengthRounded < 7.8) {
+      middleFingerLengthRounded = 7.8;
+    } else if(middleFingerLengthRounded > 10.5) {
+      middleFingerLengthRounded = 10.5;
+    }
+
+    console.log(middleFingerLengthRounded);
+    window.location.href='http://127.0.0.1:8000/Server/hand_' + middleFingerLengthRounded + '.zip';
   }
 
   }
